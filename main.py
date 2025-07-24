@@ -47,7 +47,7 @@ PRODUCT_INFO = {
     "Diptox PM": {"mapping": "DIPTOX PM", "unit": "Ct", "pieces_per_unit": 12},
     "Choc Combat GM": {"mapping": "CHOC COMBAT GM", "unit": "Ct", "pieces_per_unit": 10},
     "Raclette dumax": {"mapping": "RACLETTE DUMAX 45 GOLDEN", "unit": "Ps", "pieces_per_unit": 1},
-    "SAC GEANT SUPERT": {"mapping": "SAC GEANT SUPER", "unit": "Sac", "pieces_per_unit": 1},
+    "SAC GEANT SUPERT": {"mapping": "SAC GEANT SUPER", "unit": "Lot", "pieces_per_unit": 1},
     "Serpillère GM": {"mapping": "SERPIERRE BLANC GM", "unit": "Lot", "pieces_per_unit": 1},
     "Sonit": {"mapping": "SERPIERRE SONIT", "unit": "Lot", "pieces_per_unit": 1},
     "Jax carré super": {"mapping": "JAX CARRE DE 10", "unit": "Lot", "pieces_per_unit": 1},
@@ -90,6 +90,26 @@ PRODUCT_INFO = {
     "PASTILLE HACKER": {"mapping": "PASTILLE HAKER", "unit": "Lot", "pieces_per_unit": 10}
 }
 
+# def format_quantity(total, product_info):
+#     if pd.isna(total) or total == 0:
+#         return ""
+    
+#     unit = product_info["unit"]
+#     pieces_per_unit = product_info["pieces_per_unit"]
+    
+#     if unit in ["Ps", "Sac", "Lot"] and pieces_per_unit == 1:
+#         return f"{int(total)} {unit}"
+    
+#     full_units = total // pieces_per_unit
+#     remaining_pieces = total % pieces_per_unit
+    
+#     if full_units > 0 and remaining_pieces > 0:
+#         return f"{int(full_units)} {unit} + {int(remaining_pieces)} Ps"
+#     elif full_units > 0:
+#         return f"{int(full_units)} {unit}"
+#     else:
+#         return f"{int(remaining_pieces)} Ps"
+
 def format_quantity(total, product_info):
     if pd.isna(total) or total == 0:
         return ""
@@ -97,18 +117,29 @@ def format_quantity(total, product_info):
     unit = product_info["unit"]
     pieces_per_unit = product_info["pieces_per_unit"]
     
+    # Handle negative values
+    is_negative = total < 0
+    absolute_total = abs(total)
+    
     if unit in ["Ps", "Sac", "Lot"] and pieces_per_unit == 1:
-        return f"{int(total)} {unit}"
+        return f"{'-' if is_negative else ''}{int(absolute_total)} {unit}"
     
-    full_units = total // pieces_per_unit
-    remaining_pieces = total % pieces_per_unit
+    full_units = absolute_total // pieces_per_unit
+    remaining_pieces = absolute_total % pieces_per_unit
     
-    if full_units > 0 and remaining_pieces > 0:
-        return f"{int(full_units)} {unit} + {int(remaining_pieces)} Ps"
-    elif full_units > 0:
-        return f"{int(full_units)} {unit}"
-    else:
-        return f"{int(remaining_pieces)} Ps"
+    parts = []
+    if full_units > 0:
+        parts.append(f"{full_units} {unit}")
+    if remaining_pieces > 0:
+        parts.append(f"{remaining_pieces} Ps")
+    
+    formatted = " + ".join(parts) if parts else "0"
+    
+    # Add negative sign if needed
+    if is_negative:
+        formatted = f"-{formatted}"
+    
+    return formatted
 
 def compare_excel(file1_path, file2_path, output_path):
     try:
@@ -171,6 +202,10 @@ def compare_excel(file1_path, file2_path, output_path):
             
             if mapped_name in main_result_dict:
                 total = main_result_dict[mapped_name]
+
+                if total < 0 or total == 0:
+                    continue
+
                 formatted_total = format_quantity(total, product_info)
                 df_33333.at[idx, "Total"] = formatted_total
                 matched_products.append(product_name)
@@ -179,6 +214,10 @@ def compare_excel(file1_path, file2_path, output_path):
                 original_mapped_name = product_info["mapping"].upper()
                 if original_mapped_name in main_result_dict:
                     total = main_result_dict[original_mapped_name]
+
+                    if total < 0 or total == 0:
+                        continue
+
                     formatted_total = format_quantity(total, product_info)
                     df_33333.at[idx, "Total"] = formatted_total
                     matched_products.append(product_name)
@@ -309,7 +348,7 @@ def create_gui():
     footer_frame.pack(side=tk.BOTTOM, fill=tk.X, pady=10)
     
     def open_channel():
-        webbrowser.open("https://www.youtube.com/@houssemjallouli6083")
+        webbrowser.open("https://www.youtube.com/watch?v=3UE5jBg6JRg")
     
     tk.Label(footer_frame, 
              text="Made by ", 
