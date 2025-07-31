@@ -71,7 +71,7 @@
  [],
  False,
  False,
- 1753395074,
+ 1753973708,
  [('runw.exe',
    'D:\\workspace\\excel-comparator-app\\venv\\Lib\\site-packages\\PyInstaller\\bootloader\\Windows-64bit-intel\\runw.exe',
    'EXECUTABLE')],

@@ -18,7 +18,8 @@ PRODUCT_INFO = {
     "Class 5L": {"mapping": "CLASS LINGE BLEU 5L JMAL", "unit": "Ct", "pieces_per_unit": 3},
     "Class 3L": {"mapping": "CLASS LINGE 3L JMAL", "unit": "Ct", "pieces_per_unit": 4},
     "Class 2L": {"mapping": "CLASS LINGE 2L JMAL", "unit": "Ct", "pieces_per_unit": 6},
-    "Degraissant super mag": {"mapping": "CLEAN DEGRAISSANT", "unit": "Lot", "pieces_per_unit": 6},
+    "Degraissant super mag(CLEAN)": {"mapping": "CLEAN DEGRAISSANT", "unit": "Lot", "pieces_per_unit": 6},
+    "Degraissant super mag(EXPRESS)": {"mapping": "DEGRAISSANT MAGIC EXPRESS", "unit": "Lot", "pieces_per_unit": 6},
     "Line 2L": {"mapping": "LINE 2L PECHE JMAL", "unit": "Ct", "pieces_per_unit": 6},
     "Fawah 5L": {"mapping": "FAWAH 5L JMAL", "unit": "Ct", "pieces_per_unit": 3},
     "Fawah 2L": {"mapping": "FAWAH 2L JMAL", "unit": "Ct", "pieces_per_unit": 6},
@@ -32,7 +33,9 @@ PRODUCT_INFO = {
     "Javel 5L": {"mapping": "JAVEL JMAL 5L", "unit": "Ct", "pieces_per_unit": 3},
     "Javel 2L": {"mapping": "JAVEL JMAL 2L", "unit": "Ct", "pieces_per_unit": 6},
     "Javel 90cL": {"mapping": "JAVEL JMAL 1L", "unit": "Ct", "pieces_per_unit": 12},
-    "Bassatine 5L": {"mapping": "BASSATINE 5L BLEU JMAL", "unit": "Ct", "pieces_per_unit": 3},
+    "Bassatine 5L(B)": {"mapping": "BASSATINE 5L BLEU JMAL", "unit": "Ct", "pieces_per_unit": 3},
+    "Bassatine 5L(R)": {"mapping": "BASSATINE 5L ROSE JMAL", "unit": "Ct", "pieces_per_unit": 3},
+    "Bassatine 5L(Super)": {"mapping": "BASSATINE 5L SUPER LAVANDE JMAL", "unit": "Ct", "pieces_per_unit": 3},
     "Bassatine 1L": {"mapping": "BASSATINE 1L BLEU JMAL", "unit": "Ct", "pieces_per_unit": 12},
     "Vinaigre": {"mapping": "VINAIGRE BLANC", "unit": "Lot", "pieces_per_unit": 6},
     "Balais toscana": {"mapping": "BALAIS TOSCANA 12PC", "unit": "Ct", "pieces_per_unit": 12},
@@ -73,6 +76,7 @@ PRODUCT_INFO = {
     "Gant menage zony": {"mapping": "GANT MENAGE L", "unit": "Lot", "pieces_per_unit": 12},
     "Charbon": {"mapping": "CHARBON", "unit": "Ct", "pieces_per_unit": 60},
     "Air'fresh plein air": {"mapping": "AIR FRESH PLEIN AIR", "unit": "Ct", "pieces_per_unit": 12},
+    "AMBITION 300ML": {"mapping": "AIR FRESH AMBITION 300ML", "unit": "Ct", "pieces_per_unit": 12},
     "Manche BOIS 1.2": {"mapping": "MANCHE BOIS 1.2", "unit": "Lot", "pieces_per_unit": 12},
     "spontex": {"mapping": "SPONTEX", "unit": "Lot", "pieces_per_unit": 1},
     "Sac poubelle 50/80 n": {"mapping": "SAC 50/80 NORMAL", "unit": "Sac", "pieces_per_unit": 1},
@@ -87,7 +91,8 @@ PRODUCT_INFO = {
     "JAX RENFORCE": {"mapping": "JAX RENFORCE", "unit": "Lot", "pieces_per_unit": 1},
     "CURDENT": {"mapping": "CURDENT", "unit": "Lot", "pieces_per_unit": 1},
     "CORDE A LINGE": {"mapping": "CORDE A LINGE", "unit": "Lot", "pieces_per_unit": 10},
-    "PASTILLE HACKER": {"mapping": "PASTILLE HAKER", "unit": "Lot", "pieces_per_unit": 10}
+    "PASTILLE HACKER": {"mapping": "PASTILLE HAKER", "unit": "Lot", "pieces_per_unit": 10},
+    "APPAREIL 1800": {"mapping": "APPAREIL", "unit": "Ps", "pieces_per_unit": 1}
 }
 
 # def format_quantity(total, product_info):
@@ -156,13 +161,20 @@ def compare_excel(file1_path, file2_path, output_path):
         if not all(col in df2.columns for col in required_cols_file2):
             raise ValueError("File 2 is missing required columns (designation, Qte Vente)")
         
+        # Add these lines before merging
+        df1['Designation'] = df1['Designation'].str.strip().str.upper()
+        df2['designation'] = df2['designation'].str.strip().str.upper()
+
         # First part: Products in file2 (with possible matches in file1)
         merged_df = df2.merge(
             df1,
             left_on="designation",
             right_on="Designation",
             how="left"
-        ).fillna(0)  # Replace NaN with 0
+        )
+
+        numeric_cols = ['Qte Vente', 'Qté']
+        merged_df[numeric_cols] = merged_df[numeric_cols].fillna(0)
 
         # Create main result dataframe
         main_result = pd.DataFrame()
@@ -179,60 +191,112 @@ def compare_excel(file1_path, file2_path, output_path):
         only_in_file1_result["ajout"] = only_in_file1["Qté"].astype(int)
         only_in_file1_result["difference"] = only_in_file1_result["quantity"] - only_in_file1_result["ajout"]
 
-        # Third part: 33333 dataframe with specified products
-        df_33333 = pd.DataFrame({
-            "Désignation": list(PRODUCT_INFO.keys()),
-            "Total": None  # Initialize as empty
-        })
+        # # Third part: 33333 dataframe with specified products
+        # df_33333 = pd.DataFrame({
+        #     "Désignation": list(PRODUCT_INFO.keys()),
+        #     "Total": None  # Initialize as empty
+        # })
         
-        # Create a dictionary for quick lookup from main_result
-        main_result_dict = dict(zip(
-            main_result["name of the product"].str.strip().str.upper(),
-            main_result["difference"]
-        ))
+        # # Create a dictionary for quick lookup from main_result
+        # main_result_dict = dict(zip(
+        #     main_result["name of the product"].str.strip().str.upper(),
+        #     main_result["difference"]
+        # ))
         
-        # Fill in the totals from main comparison and format them
-        matched_products = []
-        unmatched_products = []
+        # # Fill in the totals from main comparison and format them
+        # matched_products = []
+        # unmatched_products = []
         
-        for idx, row in df_33333.iterrows():
-            product_name = row["Désignation"]
-            product_info = PRODUCT_INFO[product_name]
-            mapped_name = product_info["mapping"].strip().upper()
+        # for idx, row in df_33333.iterrows():
+        #     product_name = row["Désignation"]
+        #     product_info = PRODUCT_INFO[product_name]
+        #     mapped_name = product_info["mapping"].strip().upper()
             
-            if mapped_name in main_result_dict:
-                total = main_result_dict[mapped_name]
+        #     if mapped_name in main_result_dict:
+        #         total = main_result_dict[mapped_name]
 
-                if total < 0 or total == 0:
-                    continue
+        #         if total < 0 or total == 0:
+        #             continue
 
-                formatted_total = format_quantity(total, product_info)
-                df_33333.at[idx, "Total"] = formatted_total
-                matched_products.append(product_name)
-            else:
-                # Try again with original mapping (without stripping) for backward compatibility
-                original_mapped_name = product_info["mapping"].upper()
-                if original_mapped_name in main_result_dict:
-                    total = main_result_dict[original_mapped_name]
+        #         formatted_total = format_quantity(total, product_info)
+        #         df_33333.at[idx, "Total"] = formatted_total
+        #         matched_products.append(product_name)
+        #     else:
+        #         # Try again with original mapping (without stripping) for backward compatibility
+        #         original_mapped_name = product_info["mapping"].upper()
+        #         if original_mapped_name in main_result_dict:
+        #             total = main_result_dict[original_mapped_name]
 
-                    if total < 0 or total == 0:
-                        continue
+        #             if total < 0 or total == 0:
+        #                 continue
 
-                    formatted_total = format_quantity(total, product_info)
-                    df_33333.at[idx, "Total"] = formatted_total
-                    matched_products.append(product_name)
-                else:
-                    unmatched_products.append(product_name)
+        #             formatted_total = format_quantity(total, product_info)
+        #             df_33333.at[idx, "Total"] = formatted_total
+        #             matched_products.append(product_name)
+        #         else:
+        #             unmatched_products.append(product_name)
         
-        # Create separate dataframes for matched and unmatched products
-        matched_df = df_33333[df_33333["Désignation"].isin(matched_products)].copy()
-        unmatched_df = df_33333[df_33333["Désignation"].isin(unmatched_products)].copy()
+        # # Create separate dataframes for matched and unmatched products
+        # matched_df = df_33333[df_33333["Désignation"].isin(matched_products)].copy()
+        # unmatched_df = df_33333[df_33333["Désignation"].isin(unmatched_products)].copy()
+
+        # # Save to Excel with multiple sheets
+        # with pd.ExcelWriter(output_path) as writer:
+        #     main_result.to_excel(writer, sheet_name="Main Comparison", index=False)
+        #     only_in_file1_result.to_excel(writer, sheet_name="Only in Ajout", index=False)
+        #     matched_df.to_excel(writer, sheet_name="33333 Matched", index=False)
+        #     unmatched_df.to_excel(writer, sheet_name="33333 Unmatched", index=False)
+
+        positive_diff_products = []
+        for idx, row in main_result.iterrows():
+            if row["difference"] > 0:
+                # Use original designation from file2 (vente)
+                positive_diff_products.append({
+                    "designation": row["name of the product"],
+                    "difference": row["difference"]
+                })
+
+        # Step 2: Create matched and extra lists
+        matched_products = []
+        extra_products = []
+        
+        for product in positive_diff_products:
+            found = False
+            # Check if product exists in PRODUCT_INFO
+            for key, info in PRODUCT_INFO.items():
+                if info["mapping"].strip().upper() == product["designation"].strip().upper():
+                    matched_products.append({
+                        "Désignation": key,
+                        "Total": format_quantity(product["difference"], PRODUCT_INFO[key])
+                    })
+                    found = True
+                    break
+            
+            # Add to extra if not found in PRODUCT_INFO
+            if not found:
+                extra_products.append({
+                    "Désignation": product["designation"],
+                    "Total": f"{int(product['difference'])} Ps"  # Default to pieces
+                })
+
+        # Step 3: Create dataframes
+        matched_df = pd.DataFrame(matched_products)
+        extra_df = pd.DataFrame(extra_products)
+        
+        # Combine matched and extra products
+        final_33333_df = pd.concat([matched_df, extra_df], ignore_index=True)
+
+        # Step 4: Create unmatched products list (for separate sheet)
+        all_product_keys = list(PRODUCT_INFO.keys())
+        matched_keys = matched_df["Désignation"].tolist()
+        unmatched_products = [key for key in all_product_keys if key not in matched_keys]
+        unmatched_df = pd.DataFrame({"Désignation": unmatched_products})
 
         # Save to Excel with multiple sheets
         with pd.ExcelWriter(output_path) as writer:
             main_result.to_excel(writer, sheet_name="Main Comparison", index=False)
             only_in_file1_result.to_excel(writer, sheet_name="Only in Ajout", index=False)
-            matched_df.to_excel(writer, sheet_name="33333 Matched", index=False)
+            final_33333_df.to_excel(writer, sheet_name="33333 Matched", index=False)
             unmatched_df.to_excel(writer, sheet_name="33333 Unmatched", index=False)
 
         # Apply formatting
@@ -362,7 +426,7 @@ def create_gui():
     name_label.bind("<Button-1>", lambda e: open_channel())
     
     version_label = tk.Label(footer_frame, 
-                            text="v1.0", 
+                            text="v1.6", 
                             **style)
     version_label.pack(side=tk.RIGHT, padx=10)
     
