@@ -11,86 +11,86 @@ from PIL import Image, ImageTk  # For custom icons
   
 # Mapping dictionary for product names and packaging info
 PRODUCT_INFO = {
-    "Finesse 5L": {"mapping": "FINESSE 5L JMAL", "unit": "Ct", "pieces_per_unit": 3},
-    "Finesse 3L": {"mapping": "FINESSE 3L JMAL", "unit": "Ct", "pieces_per_unit": 4},
-    "Finesse 2L": {"mapping": "FINESSE 2L JMAL", "unit": "Ct", "pieces_per_unit": 6},
-    "Finesse 1L": {"mapping": "FINESSE 1L JMAL", "unit": "Ct", "pieces_per_unit": 12},
-    "Class 5L": {"mapping": "CLASS LINGE BLEU 5L JMAL", "unit": "Ct", "pieces_per_unit": 3},
-    "Class 3L": {"mapping": "CLASS LINGE 3L JMAL", "unit": "Ct", "pieces_per_unit": 4},
-    "Class 2L": {"mapping": "CLASS LINGE 2L JMAL", "unit": "Ct", "pieces_per_unit": 6},
-    "Degraissant super mag(CLEAN)": {"mapping": "CLEAN DEGRAISSANT", "unit": "Lot", "pieces_per_unit": 6},
-    "Degraissant super mag(EXPRESS)": {"mapping": "DEGRAISSANT MAGIC EXPRESS", "unit": "Lot", "pieces_per_unit": 6},
-    "Line 2L": {"mapping": "LINE 2L PECHE JMAL", "unit": "Ct", "pieces_per_unit": 6},
-    "Fawah 5L": {"mapping": "FAWAH 5L JMAL", "unit": "Ct", "pieces_per_unit": 3},
-    "Fawah 2L": {"mapping": "FAWAH 2L JMAL", "unit": "Ct", "pieces_per_unit": 6},
-    "Fawah 90cL": {"mapping": "FAWAH 1L JMAL", "unit": "Ct", "pieces_per_unit": 12},
-    "Ghassel 5L": {"mapping": "GHASSEL 5L JMAL", "unit": "Ct", "pieces_per_unit": 3},
-    "Ghassel 2L": {"mapping": "GHASSEL 2L JMAL", "unit": "Ct", "pieces_per_unit": 6},
-    "Ghassel wc": {"mapping": "GHASSEL WC 1L JMAL", "unit": "Ct", "pieces_per_unit": 12},
-    "Alys 5L": {"mapping": "ALYS 5L POMME JMAL", "unit": "Ct", "pieces_per_unit": 3},
-    "Alys 2L": {"mapping": "ALYS 2L POMME JMAL", "unit": "Ct", "pieces_per_unit": 6},
-    "Alys 1L": {"mapping": "ALYS 1L POMME JMAL", "unit": "Ct", "pieces_per_unit": 12},
-    "Javel 5L": {"mapping": "JAVEL JMAL 5L", "unit": "Ct", "pieces_per_unit": 3},
-    "Javel 2L": {"mapping": "JAVEL JMAL 2L", "unit": "Ct", "pieces_per_unit": 6},
-    "Javel 90cL": {"mapping": "JAVEL JMAL 1L", "unit": "Ct", "pieces_per_unit": 12},
+    "Finesse 5L (20)": {"mapping": "FINESSE 5L JMAL", "unit": "Ct", "pieces_per_unit": 3},
+    "Finesse 3L (6)": {"mapping": "FINESSE 3L JMAL", "unit": "Ct", "pieces_per_unit": 4},
+    "Finesse 2L (6)": {"mapping": "FINESSE 2L JMAL", "unit": "Ct", "pieces_per_unit": 6},
+    "Finesse 1L (8)": {"mapping": "FINESSE 1L JMAL", "unit": "Ct", "pieces_per_unit": 12},
+    "Class 5L (3)": {"mapping": "CLASS LINGE BLEU 5L JMAL", "unit": "Ct", "pieces_per_unit": 3},
+    "Class 3L (3)": {"mapping": "CLASS LINGE 3L JMAL", "unit": "Ct", "pieces_per_unit": 4},
+    "Class 2L (3)": {"mapping": "CLASS LINGE 2L JMAL", "unit": "Ct", "pieces_per_unit": 6},
+    "Line 2L (1)": {"mapping": "LINE 2L PECHE JMAL", "unit": "Ct", "pieces_per_unit": 6},
+    "Fawah 5L (15)": {"mapping": "FAWAH 5L JMAL", "unit": "Ct", "pieces_per_unit": 3},
+    "Fawah 2L (5)": {"mapping": "FAWAH 2L JMAL", "unit": "Ct", "pieces_per_unit": 6},
+    "Fawah 90cL (10)": {"mapping": "FAWAH 1L JMAL", "unit": "Ct", "pieces_per_unit": 12},
+    "Ghassel 5L (10)": {"mapping": "GHASSEL 5L JMAL", "unit": "Ct", "pieces_per_unit": 3},
+    "Ghassel 2L (4)": {"mapping": "GHASSEL 2L JMAL", "unit": "Ct", "pieces_per_unit": 6},
+    "Ghassel wc (1)": {"mapping": "GHASSEL WC 1L JMAL", "unit": "Ct", "pieces_per_unit": 12},
+    "Alys 5L (12)": {"mapping": "ALYS 5L POMME JMAL", "unit": "Ct", "pieces_per_unit": 3},
+    "Alys 2L (4)": {"mapping": "ALYS 2L POMME JMAL", "unit": "Ct", "pieces_per_unit": 6},
+    "Alys 1L (4)": {"mapping": "ALYS 1L POMME JMAL", "unit": "Ct", "pieces_per_unit": 12},
+    "Javel 5L (6)": {"mapping": "JAVEL JMAL 5L", "unit": "Ct", "pieces_per_unit": 3},
+    "Javel 2L (3)": {"mapping": "JAVEL JMAL 2L", "unit": "Ct", "pieces_per_unit": 6},
+    "Javel 90cL (3)": {"mapping": "JAVEL JMAL 1L", "unit": "Ct", "pieces_per_unit": 12},
     "Bassatine 5L(B)": {"mapping": "BASSATINE 5L BLEU JMAL", "unit": "Ct", "pieces_per_unit": 3},
     "Bassatine 5L(R)": {"mapping": "BASSATINE 5L ROSE JMAL", "unit": "Ct", "pieces_per_unit": 3},
     "Bassatine 5L(Super)": {"mapping": "BASSATINE 5L SUPER LAVANDE JMAL", "unit": "Ct", "pieces_per_unit": 3},
-    "Bassatine 1L": {"mapping": "BASSATINE 1L BLEU JMAL", "unit": "Ct", "pieces_per_unit": 12},
-    "Vinaigre": {"mapping": "VINAIGRE BLANC", "unit": "Lot", "pieces_per_unit": 6},
-    "Balais toscana": {"mapping": "BALAIS TOSCANA 12PC", "unit": "Ct", "pieces_per_unit": 12},
-    "Balais flouka": {"mapping": "BALAI FLOUKA", "unit": "Ps", "pieces_per_unit": 1},
-    "SAC CUISSANT": {"mapping": "SAC CUISSON SPONGEX", "unit": "Ps", "pieces_per_unit": 1},
-    "Aluminium Novalu": {"mapping": "NOVALU 500GR", "unit": "Ct", "pieces_per_unit": 6},
-    "Etirable Ref 300": {"mapping": "ETIRABLE DIAMANT", "unit": "Ct", "pieces_per_unit": 12},
-    "Aluminium 8m": {"mapping": "ALLUMINIUM 8M", "unit": "Lot", "pieces_per_unit": 10},
-    "Alumium ref 8": {"mapping": "ALLUMINIUM 5M", "unit": "Lot", "pieces_per_unit": 10},
-    "Etirable 8m": {"mapping": "ETIRABLE 8M", "unit": "Lot", "pieces_per_unit": 10},
-    "Diptox GM": {"mapping": "DIPTOX GM", "unit": "Ct", "pieces_per_unit": 12},
-    "Diptox PM": {"mapping": "DIPTOX PM", "unit": "Ct", "pieces_per_unit": 12},
+    "Bassatine 1L (1)": {"mapping": "BASSATINE 1L BLEU JMAL", "unit": "Ct", "pieces_per_unit": 12},
+    "Vinaigre (6)": {"mapping": "VINAIGRE BLANC", "unit": "Lot", "pieces_per_unit": 6},
+    "Degraissant super mag(CLEAN) (12)": {"mapping": "CLEAN DEGRAISSANT", "unit": "Lot", "pieces_per_unit": 6},
+    "Degraissant super mag(EXPRESS) (12)": {"mapping": "DEGRAISSANT MAGIC EXPRESS", "unit": "Lot", "pieces_per_unit": 6},
+    "Balais toscana (2)": {"mapping": "BALAIS TOSCANA 12PC", "unit": "Ct", "pieces_per_unit": 12},
+    "Balais flouka (1)": {"mapping": "BALAI FLOUKA", "unit": "Ps", "pieces_per_unit": 1},
+    "SAC CUISSANT (80)": {"mapping": "SAC CUISSON SPONGEX", "unit": "Ps", "pieces_per_unit": 1},
+    "Aluminium Novalu(3)": {"mapping": "NOVALU 500GR", "unit": "Ct", "pieces_per_unit": 6},
+    "Etirable Ref 300(18)": {"mapping": "ETIRABLE DIAMANT", "unit": "Ct", "pieces_per_unit": 12},
+    "Aluminium 8m (90)": {"mapping": "ALLUMINIUM 8M", "unit": "Lot", "pieces_per_unit": 10},
+    "Alumium ref 8 (70)": {"mapping": "ALLUMINIUM 5M", "unit": "Lot", "pieces_per_unit": 10},
+    "Etirable 8m (40)": {"mapping": "ETIRABLE 8M", "unit": "Lot", "pieces_per_unit": 10},
+    "Diptox GM (2)": {"mapping": "DIPTOX GM", "unit": "Ct", "pieces_per_unit": 12},
+    "Diptox PM (2)": {"mapping": "DIPTOX PM", "unit": "Ct", "pieces_per_unit": 12},
     "Choc Combat GM": {"mapping": "CHOC COMBAT GM", "unit": "Ct", "pieces_per_unit": 10},
-    "Raclette dumax": {"mapping": "RACLETTE DUMAX 45 GOLDEN", "unit": "Ps", "pieces_per_unit": 1},
-    "SAC GEANT SUPERT": {"mapping": "SAC GEANT SUPER", "unit": "Lot", "pieces_per_unit": 1},
-    "Serpillère GM": {"mapping": "SERPIERRE BLANC GM", "unit": "Lot", "pieces_per_unit": 1},
-    "Sonit": {"mapping": "SERPIERRE SONIT", "unit": "Lot", "pieces_per_unit": 1},
-    "Jax carré super": {"mapping": "JAX CARRE DE 10", "unit": "Lot", "pieces_per_unit": 1},
-    "Jax Fer JEX": {"mapping": "JAX FER SUPER", "unit": "Lot", "pieces_per_unit": 1},
-    "Lavette microfibre": {"mapping": "LAVETTE MICROFIBRE BINGO", "unit": "Ps", "pieces_per_unit": 1},
-    "Eponge double face": {"mapping": "EPONGE DOUBLE FACE PM", "unit": "Lot", "pieces_per_unit": 1},
-    "Plaque inox": {"mapping": "PLAQUE INOX DE 12", "unit": "Lot", "pieces_per_unit": 12},
-    "Jax inox de 3": {"mapping": "JAX INOX DE 3", "unit": "Ps", "pieces_per_unit": 1},
-    "Dexel 10 Kg": {"mapping": "DEXEL 10KG", "unit": "Sac", "pieces_per_unit": 1},
-    "Pince linge cobra": {"mapping": "PINCE COBRA", "unit": "Ps", "pieces_per_unit": 1},
-    "Cachemir": {"mapping": "CACHMIR BLANC", "unit": "Lot", "pieces_per_unit": 1},
-    "Sunsilk": {"mapping": "SUNSILK 350ML", "unit": "Ct", "pieces_per_unit": 12},
-    "MANCHE METALLIQ 1.2": {"mapping": "MANCHE METALIQUE 1.2", "unit": "Lot", "pieces_per_unit": 12},
-    "Savon DUMAX 400ML": {"mapping": "DUMAX 400ML", "unit": "Ct", "pieces_per_unit": 24},
-    "Savon DUMAX 1L": {"mapping": "SAVON LIQUIDE DUMAX 1L", "unit": "Ct", "pieces_per_unit": 12},
-    "MANCHE METALLIQ 1.4": {"mapping": "MANCHE METALIQUE 1.4", "unit": "Lot", "pieces_per_unit": 12},
-    "CHOC WC": {"mapping": "CHOC WC", "unit": "Ct", "pieces_per_unit": 12},
-    "PAPIER CUISSANT": {"mapping": "PAPIER CUISSANT", "unit": "Ps", "pieces_per_unit": 1},
-    "MANCHE BOIS 1.4": {"mapping": "MANCHE BOIS 1.4", "unit": "Lot", "pieces_per_unit": 12},
-    "Pince papillon": {"mapping": "PINCE PAPILLON", "unit": "Ps", "pieces_per_unit": 1},
-    "Sachet congelation": {"mapping": "SAC CONGELATION 1L", "unit": "Ct", "pieces_per_unit": 50},
-    "Lexus vitre": {"mapping": "LUXIS VITRE", "unit": "Ct", "pieces_per_unit": 10},
-    "Gant menage zony": {"mapping": "GANT MENAGE L", "unit": "Lot", "pieces_per_unit": 12},
+    "Raclette dumax (12)": {"mapping": "RACLETTE DUMAX 45 GOLDEN", "unit": "Ps", "pieces_per_unit": 1},
+    "SAC GEANT SUPERT (8)": {"mapping": "SAC GEANT SUPER", "unit": "Lot", "pieces_per_unit": 1},
+    "Serpillère GM (5)": {"mapping": "SERPIERRE BLANC GM", "unit": "Lot", "pieces_per_unit": 12},
+    "Sonit (6)": {"mapping": "SERPILLERE SONIT", "unit": "Lot", "pieces_per_unit": 12},
+    "Jax carré super (4)": {"mapping": "JAX CARRE DE 10", "unit": "Lot", "pieces_per_unit": 1},
+    "Jax Fer JEX (10)": {"mapping": "JAX FER SUPER", "unit": "Lot", "pieces_per_unit": 1},
+    "Lavette microfibre (24)": {"mapping": "LAVETTE MICROFIBRE BINGO", "unit": "Ps", "pieces_per_unit": 1},
+    "Eponge double face (4)": {"mapping": "EPONGE DOUBLE FACE PM", "unit": "Lot", "pieces_per_unit": 1},
+    "Plaque inox (6)": {"mapping": "PLAQUE INOX DE 12", "unit": "Lot", "pieces_per_unit": 12},
+    "Jax inox de 3 (24)": {"mapping": "JAX INOX DE 3", "unit": "Ps", "pieces_per_unit": 1},
+    "Dexel 10 Kg (6)": {"mapping": "DEXEL 10KG", "unit": "Sac", "pieces_per_unit": 1},
+    "Pince linge cobra (48)": {"mapping": "PINCE COBRA", "unit": "Ps", "pieces_per_unit": 1},
+    "Cachemir (10)": {"mapping": "CACHMIR BLANC", "unit": "Lot", "pieces_per_unit": 20},
+    "Sunsilk (3)": {"mapping": "SUNSILK 350ML", "unit": "Ct", "pieces_per_unit": 12},
+    "MANCHE METALLIQ 1.2 (2)": {"mapping": "MANCHE METALIQUE 1.2", "unit": "Lot", "pieces_per_unit": 12},
+    "Savon DUMAX 400ML (24)": {"mapping": "DUMAX 400ML", "unit": "Ct", "pieces_per_unit": 24},
+    "Savon DUMAX 1L (12)": {"mapping": "SAVON DUMAX 1L", "unit": "Ct", "pieces_per_unit": 12},
+    "MANCHE METALLIQ 1.4 (24)": {"mapping": "MANCHE METALIQUE 1.4", "unit": "Lot", "pieces_per_unit": 12},
+    "CHOC WC (1)": {"mapping": "CHOC WC PM", "unit": "Ct", "pieces_per_unit": 12},
+    "PAPIER CUISSANT (100)": {"mapping": "PAPIER CUISSANT", "unit": "Ps", "pieces_per_unit": 1},
+    "MANCHE BOIS 1.4 (48)": {"mapping": "MANCHE BOIS 1.4", "unit": "Lot", "pieces_per_unit": 12},
+    "Pince papillon (48)": {"mapping": "PINCE PAPILLON", "unit": "Ps", "pieces_per_unit": 1},
+    "Sachet congelation(50)": {"mapping": "SAC CONGELATION 1L", "unit": "Ct", "pieces_per_unit": 50},
+    "Lexus vitre (12)": {"mapping": "LUXIS VITRE", "unit": "Ct", "pieces_per_unit": 10},
+    "Gant menage zony (24)": {"mapping": "GANT MENAGE L", "unit": "Lot", "pieces_per_unit": 12},
     "Charbon": {"mapping": "CHARBON", "unit": "Ct", "pieces_per_unit": 60},
     "Air'fresh plein air": {"mapping": "AIR FRESH PLEIN AIR", "unit": "Ct", "pieces_per_unit": 12},
-    "AMBITION 300ML": {"mapping": "AIR FRESH AMBITION 300ML", "unit": "Ct", "pieces_per_unit": 12},
-    "Manche BOIS 1.2": {"mapping": "MANCHE BOIS 1.2", "unit": "Lot", "pieces_per_unit": 12},
-    "spontex": {"mapping": "SPONTEX", "unit": "Lot", "pieces_per_unit": 1},
-    "Sac poubelle 50/80 n": {"mapping": "SAC 50/80 NORMAL", "unit": "Sac", "pieces_per_unit": 1},
-    "Tej 375gr": {"mapping": "TEJ 375 GR VERT", "unit": "Ct", "pieces_per_unit": 24},
-    "Zitouna 100gr": {"mapping": "ZITOUNA 100GR", "unit": "Ct", "pieces_per_unit": 50},
-    "Serpierre raclette": {"mapping": "SERPILLIERE RACLETTE", "unit": "Ps", "pieces_per_unit": 1},
-    "Serpierre microfibre": {"mapping": "SERPILLIERE MICROFIBRE BINGO", "unit": "Ps", "pieces_per_unit": 1},
-    "Zitouna 400gr": {"mapping": "ZITOUNA 400GR VERT", "unit": "Ct", "pieces_per_unit": 24},
-    "Tej 125gr": {"mapping": "TEJ 100 GR VERT", "unit": "Ct", "pieces_per_unit": 72},
-    "50*80 super": {"mapping": "SAC 50/80 SUPER", "unit": "Sac", "pieces_per_unit": 1},
-    "Poubelle geant": {"mapping": "SAC GEANT NORMAL", "unit": "Sac", "pieces_per_unit": 1},
-    "JAX RENFORCE": {"mapping": "JAX RENFORCE", "unit": "Lot", "pieces_per_unit": 1},
-    "CURDENT": {"mapping": "CURDENT", "unit": "Lot", "pieces_per_unit": 1},
-    "CORDE A LINGE": {"mapping": "CORDE A LINGE", "unit": "Lot", "pieces_per_unit": 10},
+    "AMBITION 300ML": {"mapping": "AIR FRESH AMBITION 300ML", "unit": "Ct", "pieces_per_unit": 24},
+    "Manche BOIS 1.2 (48)": {"mapping": "MANCHE BOIS 1.2", "unit": "Lot", "pieces_per_unit": 12},
+    "spontex (3)": {"mapping": "SPONTEX PM", "unit": "Lot", "pieces_per_unit": 1},
+    "Sac poubelle 50/80 normal (2)": {"mapping": "SAC 50/80 NORMAL", "unit": "Sac", "pieces_per_unit": 1},
+    "Tej 375gr (2)": {"mapping": "TEJ 375 GR VERT", "unit": "Ct", "pieces_per_unit": 24},
+    "Zitouna 100gr (50)": {"mapping": "ZITOUNA 100GR", "unit": "Ct", "pieces_per_unit": 50},
+    "Serpierre raclette (1)": {"mapping": "SERPILLIERE RACLETTE", "unit": "Ps", "pieces_per_unit": 1},
+    "Serpierre microfibre (12)": {"mapping": "SERPILLIERE MICROFIBRE BINGO", "unit": "Ps", "pieces_per_unit": 1},
+    "Zitouna 400gr (24)": {"mapping": "ZITOUNA 400GR VERT", "unit": "Ct", "pieces_per_unit": 24},
+    "Tej 125gr (3)": {"mapping": "TEJ 100 GR VERT", "unit": "Ct", "pieces_per_unit": 72},
+    "50*80 super (2)": {"mapping": "SAC 50/80 SUPER", "unit": "Sac", "pieces_per_unit": 1},
+    "Poubelle geant (2)": {"mapping": "SAC GEANT NORMAL", "unit": "Sac", "pieces_per_unit": 1},
+    "JAX RENFORCE(4)": {"mapping": "JAX RENFORCE", "unit": "Lot", "pieces_per_unit": 12},
+    "CURDENT(2)": {"mapping": "CURDENT", "unit": "Lot", "pieces_per_unit": 1},
+    "CORDE A LINGE(10)": {"mapping": "CORDE A LINGE", "unit": "Lot", "pieces_per_unit": 10},
     "PASTILLE HACKER": {"mapping": "PASTILLE HAKER", "unit": "Lot", "pieces_per_unit": 10},
     "APPAREIL 1800": {"mapping": "APPAREIL", "unit": "Ps", "pieces_per_unit": 1}
 }
@@ -153,43 +153,46 @@ def compare_excel(file1_path, file2_path, output_path):
         df2 = pd.read_excel(file2_path, engine='xlrd')
     
         # Validate required columns exist
-        required_cols_file1 = ["Designation", "Qté"]
+        required_cols_file1 = ["Designation (C)", "Qté (D)"]
         required_cols_file2 = ["designation", "Qte Vente"]
 
         if not all(col in df1.columns for col in required_cols_file1):
-            raise ValueError("File 1 is missing required columns (Designation, Qté)")
+            raise ValueError("File 1 is missing required columns (Designation (C), Qté (D))")
         if not all(col in df2.columns for col in required_cols_file2):
             raise ValueError("File 2 is missing required columns (designation, Qte Vente)")
         
         # Add these lines before merging
-        df1['Designation'] = df1['Designation'].str.strip().str.upper()
+        df1['Designation (C)'] = df1['Designation (C)'].str.strip().str.upper()
         df2['designation'] = df2['designation'].str.strip().str.upper()
 
         # First part: Products in file2 (with possible matches in file1)
         merged_df = df2.merge(
             df1,
             left_on="designation",
-            right_on="Designation",
+            right_on="Designation (C)",
             how="left"
         )
 
-        numeric_cols = ['Qte Vente', 'Qté']
+        numeric_cols = ['Qte Vente', 'Qté (D)']
         merged_df[numeric_cols] = merged_df[numeric_cols].fillna(0)
 
         # Create main result dataframe
         main_result = pd.DataFrame()
         main_result["name of the product"] = merged_df["designation"]
         main_result["quantity"] = merged_df["Qte Vente"]
-        main_result["ajout"] = merged_df["Qté"].astype(int)
+        main_result["ajout"] = merged_df["Qté (D)"].astype(int)
         main_result["difference"] = main_result["quantity"] - main_result["ajout"]
 
         # Second part: Products only in file1
-        only_in_file1 = df1[~df1["Designation"].isin(df2["designation"])].copy()
+        only_in_file1 = df1[~df1["Designation (C)"].isin(df2["designation"])].copy()
         only_in_file1_result = pd.DataFrame()
-        only_in_file1_result["name of the product"] = only_in_file1["Designation"]
+        only_in_file1_result["name of the product"] = only_in_file1["Designation (C)"]
         only_in_file1_result["quantity"] = 0
-        only_in_file1_result["ajout"] = only_in_file1["Qté"].astype(int)
+        only_in_file1_result["ajout"] = only_in_file1["Qté (D)"].astype(int)
         only_in_file1_result["difference"] = only_in_file1_result["quantity"] - only_in_file1_result["ajout"]
+
+        # Append "Only in Ajout" items to the main result
+        main_result = pd.concat([main_result, only_in_file1_result], ignore_index=True)
 
         # # Third part: 33333 dataframe with specified products
         # df_33333 = pd.DataFrame({
@@ -287,47 +290,137 @@ def compare_excel(file1_path, file2_path, output_path):
         final_33333_df = pd.concat([matched_df, extra_df], ignore_index=True)
 
         # Step 4: Create unmatched products list (for separate sheet)
-        all_product_keys = list(PRODUCT_INFO.keys())
-        matched_keys = matched_df["Désignation"].tolist()
-        unmatched_products = [key for key in all_product_keys if key not in matched_keys]
-        unmatched_df = pd.DataFrame({"Désignation": unmatched_products})
+        #all_product_keys = list(PRODUCT_INFO.keys())
+        #matched_keys = matched_df["Désignation"].tolist()
+        #unmatched_products = [key for key in all_product_keys if key not in matched_keys]
+        #unmatched_df = pd.DataFrame({"Désignation": unmatched_products})
 
         # Save to Excel with multiple sheets
         with pd.ExcelWriter(output_path) as writer:
             main_result.to_excel(writer, sheet_name="Main Comparison", index=False)
-            only_in_file1_result.to_excel(writer, sheet_name="Only in Ajout", index=False)
+            #only_in_file1_result.to_excel(writer, sheet_name="Only in Ajout", index=False)
             final_33333_df.to_excel(writer, sheet_name="33333 Matched", index=False)
-            unmatched_df.to_excel(writer, sheet_name="33333 Unmatched", index=False)
+            #unmatched_df.to_excel(writer, sheet_name="33333 Unmatched", index=False)
 
         # Apply formatting
         wb = load_workbook(output_path)
+
+        from openpyxl.styles import Font, Border, Side, Alignment
+        from openpyxl.utils import get_column_letter
+        bold_font = Font(bold=True, size=12)
+        header_font = Font(bold=True, size=14, color="FFFFFF")
+        normal_font = Font(size=12)
+        thin_border = Border(left=Side(style='thin'), 
+                             right=Side(style='thin'), 
+                             top=Side(style='thin'), 
+                             bottom=Side(style='thin'))
+        header_fill = PatternFill(start_color="366092", end_color="366092", fill_type="solid")
+        red_fill = PatternFill(start_color="FFC7CE", end_color="FFC7CE", fill_type="solid")
+        blue_fill = PatternFill(start_color="BDD7EE", end_color="BDD7EE", fill_type="solid")
+        green_fill = PatternFill(start_color="C6EFCE", end_color="C6EFCE", fill_type="solid")
         
         # Format main comparison sheet
         ws_main = wb["Main Comparison"]
-        red_fill = PatternFill(start_color="FFC7CE", end_color="FFC7CE", fill_type="solid")
+        #red_fill = PatternFill(start_color="FFC7CE", end_color="FFC7CE", fill_type="solid")
+        #blue_fill = PatternFill(start_color="BDD7EE", end_color="BDD7EE", fill_type="solid")
+        main_section_end = len(merged_df) + 2
+
+        # Apply formatting to all cells
+        for row in ws_main.iter_rows():
+            for cell in row:
+                cell.font = normal_font
+                cell.border = thin_border
+                cell.alignment = Alignment(horizontal='center', vertical='center')
+
+        # Format headers
+        for cell in ws_main[1]:
+            cell.font = header_font
+            cell.fill = header_fill
+            cell.alignment = Alignment(horizontal='center', vertical='center', wrap_text=True)
+
         for row in range(2, ws_main.max_row + 1):
             if ws_main.cell(row=row, column=4).value < 0:
                 ws_main.cell(row=row, column=4).fill = red_fill
+            # Apply blue fill for "Only in Ajout" items (rows after the main section)
+            # if row >= main_section_end:
+            #     ws_main.cell(row=row, column=4).fill = blue_fill
+            if row >= main_section_end:
+                for col in range(1, ws_main.max_column + 1):
+                    ws_main.cell(row=row, column=col).fill = blue_fill
+
+        for column in ws_main.columns:
+            max_length = 0
+            column_letter = get_column_letter(column[0].column)
+            for cell in column:
+                try:
+                    if len(str(cell.value)) > max_length:
+                        max_length = len(str(cell.value))
+                except:
+                    pass
+            adjusted_width = min(max_length + 7, 55)  # Cap at 50 characters wide
+            ws_main.column_dimensions[column_letter].width = adjusted_width
 
         # Format only in ajout sheet (blue)
-        ws_ajout = wb["Only in Ajout"]
-        blue_fill = PatternFill(start_color="BDD7EE", end_color="BDD7EE", fill_type="solid")
-        for row in range(2, ws_ajout.max_row + 1):
-            ws_ajout.cell(row=row, column=4).fill = blue_fill
+        # ws_ajout = wb["Only in Ajout"]
+        # blue_fill = PatternFill(start_color="BDD7EE", end_color="BDD7EE", fill_type="solid")
+        # for row in range(2, ws_ajout.max_row + 1):
+        #     ws_ajout.cell(row=row, column=4).fill = blue_fill
 
         # Format 33333 Matched sheet (green for matched products)
         ws_33333_matched = wb["33333 Matched"]
-        green_fill = PatternFill(start_color="C6EFCE", end_color="C6EFCE", fill_type="solid")
+
+        # Apply formatting to all cells
+        for row in ws_33333_matched.iter_rows():
+            for cell in row:
+                cell.font = normal_font
+                cell.border = thin_border
+                cell.alignment = Alignment(horizontal='center', vertical='center')
+        
+        # Format headers
+        for cell in ws_33333_matched[1]:
+            cell.font = header_font
+            cell.fill = header_fill
+            cell.alignment = Alignment(horizontal='center', vertical='center', wrap_text=True)
+
+        #green_fill = PatternFill(start_color="C6EFCE", end_color="C6EFCE", fill_type="solid")
         for row in range(2, ws_33333_matched.max_row + 1):
             if ws_33333_matched.cell(row=row, column=2).value is not None:
                 ws_33333_matched.cell(row=row, column=2).fill = green_fill
 
+         # Auto-adjust column widths for 33333 sheet
+        for column in ws_33333_matched.columns:
+            max_length = 0
+            column_letter = get_column_letter(column[0].column)
+            for cell in column:
+                try:
+                    if len(str(cell.value)) > max_length:
+                        max_length = len(str(cell.value))
+                except:
+                    pass
+            adjusted_width = min(max_length + 20, 68)
+            ws_33333_matched.column_dimensions[column_letter].width = adjusted_width
+        
+        # Set print settings for better printing
+        for sheet in wb.sheetnames:
+            ws = wb[sheet]
+            # Set print area
+            ws.print_area = f'A1:{get_column_letter(ws.max_column)}{ws.max_row}'
+            # Set page orientation to landscape
+            #ws.page_setup.orientation = ws.ORIENTATION_LANDSCAPE
+            # Fit to width of 1 page
+            ws.page_setup.fitToWidth = 1
+            ws.page_setup.fitToHeight = False
+            # Center horizontally
+            ws.page_setup.horizontalCentered = True
+            # Add headers on each page
+            ws.print_title_rows = '1:1'  # Repeat first row on each page
+
         # Format 33333 Unmatched sheet (yellow for unmatched products)
-        ws_33333_unmatched = wb["33333 Unmatched"]
-        yellow_fill = PatternFill(start_color="FFEB9C", end_color="FFEB9C", fill_type="solid")
-        for row in range(2, ws_33333_unmatched.max_row + 1):
-            ws_33333_unmatched.cell(row=row, column=1).fill = yellow_fill
-            ws_33333_unmatched.cell(row=row, column=2).fill = yellow_fill
+        # ws_33333_unmatched = wb["33333 Unmatched"]
+        # yellow_fill = PatternFill(start_color="FFEB9C", end_color="FFEB9C", fill_type="solid")
+        # for row in range(2, ws_33333_unmatched.max_row + 1):
+        #     ws_33333_unmatched.cell(row=row, column=1).fill = yellow_fill
+        #     ws_33333_unmatched.cell(row=row, column=2).fill = yellow_fill
 
         # Save the workbook with formatting
         wb.save(output_path)
@@ -349,29 +442,29 @@ def create_gui():
     root.geometry("600x400")
     
     # Custom style
-    root.configure(bg='#f0f0f0')
-    style = {'font': ('Arial', 10), 'bg': '#f0f0f0', 'fg': '#333333'}
-    highlight_style = {'font': ('Arial', 10, 'bold'), 'bg': '#f0f0f0', 'fg': '#0066cc'}
+    root.configure(bg="#ac48f9")
+    style = {'font': ('Arial', 12), 'bg': '#f0f0f0', 'fg': '#333333'}
+    highlight_style = {'font': ('Arial', 13, 'bold'), 'bg': '#f0f0f0', 'fg': "#bd0606"}
     
     # Header frame
-    header_frame = tk.Frame(root, bg='#4b8bbe')
+    header_frame = tk.Frame(root, bg="#06bd18")
     header_frame.pack(fill=tk.X)
     
     # Add your photo (replace with your image file)
     try:
         photo = Image.open("houssem_photo.png").resize((50,50))
         photo_img = ImageTk.PhotoImage(photo)
-        photo_label = tk.Label(header_frame, image=photo_img, bg='#4b8bbe')
+        photo_label = tk.Label(header_frame, image=photo_img, bg="#06bd0f")
         photo_label.image = photo_img  # Keep reference
-        photo_label.pack(side=tk.LEFT, padx=10, pady=5)
+        photo_label.pack(side=tk.LEFT, padx=25, pady=5)
     except:
         pass  # Skip if image not found
     
     # Title
     title = tk.Label(header_frame, 
                    text="الروكوبومون", 
-                   font=('Arial', 20, 'bold'), 
-                   bg='#4b8bbe', fg='white')
+                   font=('Arial', 30, 'bold'), 
+                   bg="#09bd06", fg='white')
     title.pack(side=tk.LEFT, padx=100)
     
     # Instructions frame
@@ -426,7 +519,7 @@ def create_gui():
     name_label.bind("<Button-1>", lambda e: open_channel())
     
     version_label = tk.Label(footer_frame, 
-                            text="v1.6", 
+                            text="v1.9", 
                             **style)
     version_label.pack(side=tk.RIGHT, padx=10)
     
